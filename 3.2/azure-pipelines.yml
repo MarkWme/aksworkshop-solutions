@@ -1,0 +1,9 @@
+pool:
+    vmImage: 'Ubuntu 16.04'
+
+steps:
+- task: PublishBuildArtifacts@1
+  displayName: 'publish helm folder as an artifact'
+  inputs:
+    artifactName: 'helm'
+    pathToPublish: 'helm'

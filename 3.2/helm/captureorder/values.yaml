@@ -1,0 +1,24 @@
+minReplicaCount: 1
+maxReplicaCount: 2
+targetCPUUtilizationPercentage: 50
+teamName: azch-team
+mongoHost: "orders-mongo-mongodb.default.svc.cluster.local"
+mongoUser: "orders-user"
+mongoPassword: "orders-password"
+
+image:
+  repository: xcreuwakschallenge.azurecr.io/captureorder
+  tag: # Will be set at command runtime
+  pullPolicy: Always
+
+service:
+  type: LoadBalancer
+  port: 80
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi

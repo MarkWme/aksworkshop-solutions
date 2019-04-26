@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "captureorder.fullname" . }}
+  labels:
+    app: {{ include "captureorder.name" . }}
+    chart: {{ include "captureorder.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  selector:
+      matchLabels:
+        app: captureorder
+  template:
+      metadata:
+        labels:
+          app: {{ include "captureorder.name" . }}
+          release: {{ .Release.Name }}
+      spec:
+        containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /healthz
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /healthz
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+          env:
+          - name: TEAMNAME
+            value: {{ .Values.teamName }}
+          - name: MONGOHOST
+            value: {{ .Values.mongoHost }}
+          - name: MONGOUSER
+            value: {{ .Values.mongoUser }}
+          - name: MONGOPASSWORD
+            value: {{ .Values.mongoPassword }}
+          ports:
+          - containerPort: 80
