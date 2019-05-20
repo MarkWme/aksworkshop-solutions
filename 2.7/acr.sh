@@ -1,2 +1,2 @@
 #1/bin/sh
-az acr create --resource-group x-rg-euw-akschallenge --name xcreuwakschallenge --sku Standard --location westeurope
+az acr create --resource-group x-rg-euw-aksworkshop --name xcreuwaksworkshop --sku Standard --location westeurope
