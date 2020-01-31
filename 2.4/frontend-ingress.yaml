@@ -4,10 +4,9 @@ metadata:
   name: frontend
   annotations:
     kubernetes.io/ingress.class: nginx
-
 spec:
   rules:
-  - host: frontend.52.157.229.138.nip.io
+  - host: frontend.51.105.126.236.nip.io
     http:
       paths:
       - backend:
